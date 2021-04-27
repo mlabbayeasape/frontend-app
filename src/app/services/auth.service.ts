@@ -12,7 +12,23 @@ export class AuthService {
   userID: string;
   isAuth$ = new BehaviorSubject<boolean> (false);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.initAuth();
+  }
+
+  initAuth(){
+    if(typeof localStorage !== "undefined"){
+      const data = JSON.parse(localStorage.getItem('auth'));
+      if(data){
+        if(data.userId && data.token){
+          this.userID = data.userID;
+          this.token = data.token;
+          this.isAuth$.next(true);
+          console.log("isAuth=",this.isAuth$);
+        }
+      }
+    }
+  }
 
   signUp(email: string, password: string){
       return new Promise(
@@ -51,6 +67,10 @@ export class AuthService {
                 this.token = authData.token;
                 this.userID = authData.userId;
                 this.isAuth$.next(true);
+                //Sauvegarde AuthData en local
+                if(typeof localStorage !== "undefined"){
+                  localStorage.setItem('auth',JSON.stringify(authData));
+                }
                 resolve(true);
             },
             (error) => {
@@ -65,6 +85,9 @@ export class AuthService {
     this.isAuth$.next(false);
     this.userID = null;
     this.token = null;
+    if (typeof localStorage !== "undefined"){
+      localStorage.setItem('auth',null);
+    }
   }
 
 }
