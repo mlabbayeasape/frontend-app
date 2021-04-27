@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://api-angular-shop.herokuapp.com/api/'
+  
 };
 
 /*
