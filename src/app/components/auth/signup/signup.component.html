@@ -1,4 +1,4 @@
-<app-header-page page="Resgister"></app-header-page>
+<app-header-page page="Register"></app-header-page>
 <div class="register pt-80 pb-80">
   <div class="container">
       <div class="row">
@@ -7,7 +7,7 @@
               <h3 class="title text-capitalize mb-30 pb-25">Create an account</h3>
               <div class="log-in-form" [formGroup]="signUpForm">
                   <form class="personal-information" >
-                      <div class="alert alert-danger" ></div>
+                      <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
                       <div class="order-asguest theme1 mb-3">
                           <span>Already have an account?</span>
                           <a class="text-muted hover-color" routerLink="/signin">Log in instead!</a>
