@@ -14,6 +14,7 @@ export class ShopComponent implements OnInit {
   products: Product[];
   productsSub: Subscription;
   userId: string;
+  loaded: boolean = false;
 
   api: string = environment.api
 
@@ -24,9 +25,11 @@ export class ShopComponent implements OnInit {
     this.productsSub = this.productService.products$.subscribe(
       (products: Product[])=>{
         this.products = products;
+        this.loaded = true;
       },
       (error)=>{
         console.log(error);
+        this.loaded = false;
       }
     );
     this.productService.getProducts();

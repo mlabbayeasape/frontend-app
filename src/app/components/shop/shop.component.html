@@ -1,5 +1,6 @@
 <app-header-page page="Shop"></app-header-page>
-<div class="tab-content container" id="pills-tabContent">
+<mat-spinner style="margin-bottom:300px;" class="container text-center" *ngIf="!loaded"></mat-spinner>
+<div class="tab-content container" id="pills-tabContent" *ngIf="loaded">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <div class="row grid-view theme1">
           <div class="col-sm-6 col-md-4 mb-30" *ngFor="let product of products">

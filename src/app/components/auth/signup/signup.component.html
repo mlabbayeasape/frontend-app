@@ -1,5 +1,6 @@
 <app-header-page page="Register"></app-header-page>
-<div class="register pt-80 pb-80">
+<mat-spinner style="margin-bottom:300px;" class="container text-center" *ngIf="loading"></mat-spinner>
+<div class="register pt-80 pb-80" *ngIf="!loading">
   <div class="container">
       <div class="row">
           <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
