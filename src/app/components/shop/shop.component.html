@@ -8,8 +8,8 @@
                   <div class="card-body">
                       <div class="product-thumbnail position-relative">
                           <span class="badge badge-danger top-right">New</span>
-                          <a>
-                            {{product.image}}
+                          <a [routerLink]="['/single-product', product._id]">lien</a>
+                          <a [routerLink]="['/single-product', product._id]">
                               <img class="first-img" width="420" [src]="product.image" alt="thumbnail">
                           </a>
                           <!-- product links -->
