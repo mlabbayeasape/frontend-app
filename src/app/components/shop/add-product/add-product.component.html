@@ -3,8 +3,8 @@
 <div *ngIf="!loading" class="col-sm-6 offset-sm-3 mt-2">
   <div class="row">
     <div class="col-md-4">
-
-      <input type="file"  (change)="onImagePick($event)" class="form-control">
+      <button type="button" class="btn theme-btn--dark1 btn--md mt-2" (click)="filepicker.click()"> add Image</button>
+      <input style="display:none" type="file" #filepicker (change)="onImagePick($event)" class="form-control">
       <div class="image-preview" *ngIf="imagePreview">
         <img [src]="imagePreview" alt="">
       </div>

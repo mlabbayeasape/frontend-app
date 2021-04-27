@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -16,6 +19,8 @@ export class AddProductComponent implements OnInit {
   userID: string;
   constructor(private formBuilder: FormBuilder,
               private auth: AuthService,
+              private productService: ProductService,
+              private router: Router,
     ) { }
 
   ngOnInit(): void {
@@ -27,10 +32,34 @@ export class AddProductComponent implements OnInit {
       image:        [null,Validators.required],
     });
     this.userID = this.auth.userID;
+
+
   }
 
   onSubmit():void{
-
+    this.loading = true;
+    const product = new Product();
+    product.name = this.productForm.get('name').value;
+    product.description = this.productForm.get('description').value;
+    product.price = this.productForm.get('price').value * 100;
+    product.stock = this.productForm.get('stock').value;
+    product.image = '';
+    product.userId = this.userID;
+        // save product
+        this.productService.createNewProduct(product, this.productForm.get('image').value)
+        .then(
+          ()=>{
+            this.productForm.reset();
+            this.loading = false;
+            this.router.navigate(['/shop']);
+          }
+        )
+        .catch(
+          (error)=>{
+            this.loading = false;
+            this.errorMessage = error.message;
+          }
+        );
   }
 
   onImagePick(event: Event){
