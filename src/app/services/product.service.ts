@@ -11,7 +11,7 @@ import { Product } from '../models/product';
 })
 export class ProductService {
 
-  api = environment.api+'/';
+  api = environment.api;
   products: Product[];
   products$ = new Subject<Product[]>();
 
