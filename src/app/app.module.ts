@@ -29,6 +29,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     QuickViewProductModalComponent,
     AddToCartModalComponent,
     DeleteProductModalComponent,
+    HomeComponent,
 
 
 
