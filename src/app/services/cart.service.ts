@@ -17,7 +17,22 @@ export class CartService {
   tva = environment.tva/100
 
 
-  constructor() { }
+  constructor() {
+    this.initCart();
+  }
+
+
+  initCart():void{
+    if(typeof(localStorage) !== "undefined"){
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      console.log("cart=",cart);
+      this.cart = cart ? cart : null;
+    } else {
+      this.cart = null;
+    }
+  }
+
+
 
   emitCart(){
     this.cart$.next(this.cart)
@@ -46,6 +61,9 @@ export class CartService {
       this.cart.resume.costTaxe += this.cart.resume.costHT * this.tva;
       this.cart.resume.costTTC += this.cart.resume.costHT * (1 + this.tva);
     })
+    if(typeof(localStorage) !== "undefined"){
+      localStorage.setItem('cart',JSON.stringify(this.cart));
+    }
     this.emitCart();
   }
 
