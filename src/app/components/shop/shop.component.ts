@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -18,10 +19,12 @@ export class ShopComponent implements OnInit {
 
   api: string = environment.api
 
-  constructor(private productService: ProductService
+  constructor(private productService: ProductService,
+              private auth: AuthService,
     ) { }
 
   ngOnInit(): void {
+    this.userId = this.auth.userID;
     this.productsSub = this.productService.products$.subscribe(
       (products: Product[])=>{
         this.products = products;
