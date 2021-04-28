@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'http://api-angular-shop.herokuapp.com/api/'
-  
+  api: 'http://api-angular-shop.herokuapp.com/api/',
+  tva: 20
 };
 
 /*

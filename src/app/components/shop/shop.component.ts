@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -21,6 +22,7 @@ export class ShopComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private auth: AuthService,
+              private cartService: CartService,
     ) { }
 
   ngOnInit(): void {
@@ -36,6 +38,11 @@ export class ShopComponent implements OnInit {
       }
     );
     this.productService.getProducts();
+  }
+
+  addToCart(product: Product){
+    this.cartService.addToCart(product);
+    console.log(this.cartService.cart)
   }
 
 
