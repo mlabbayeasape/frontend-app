@@ -9,15 +9,16 @@ import { CartComponent } from './components/shop/cart/cart.component';
 import { EditProductComponent } from './components/shop/edit-product/edit-product.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { SingleProductComponent } from './components/shop/single-product/single-product.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'shop', component: ShopComponent},
-  { path: 'add-product', component: AddProductComponent},
+  { path: 'add-product', component: AddProductComponent, canActivate: [AuthGuard]},
   { path: 'single-product/:id', component: SingleProductComponent},
-  { path: 'edit-product/:id', component: EditProductComponent},
+  { path: 'edit-product/:id', component: EditProductComponent,canActivate: [AuthGuard]},
   { path: 'cart', component: CartComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: '**', component: NotFoundComponent},
