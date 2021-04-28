@@ -64,18 +64,24 @@ export class EditProductComponent implements OnInit {
   }
 
 
-  onSubmit():void{
+  onSubmit(){
     this.loading = true;
     const product = new Product();
+
+    if(this.product.userId !== this.userID){
+      console.log("you can't edit this product")
+      return this.router.navigate(['/not-found']);
+    }
+
     product._id = this.product._id;
     product.name = this.productForm.get('name').value;
     product.description = this.productForm.get('description').value;
     product.price = this.productForm.get('price').value * 100;
     product.stock = this.productForm.get('stock').value;
     product.image = '';
-    product.userId = this.userID;
+    product.userId = this.product.userId;
 
-        // save product
+        // save updated product
 
         this.productService.updateProduct(this.product._id,product, this.productForm.get('image').value)
         .then(

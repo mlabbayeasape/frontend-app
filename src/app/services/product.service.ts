@@ -90,7 +90,7 @@ export class ProductService {
       }
       productData.append('product',JSON.stringify(product));
 
-      this.http.put(this.api+'product/'+id, productData).subscribe(
+      this.http.put(this.api+'products/'+id, productData).subscribe(
         (data: Data) => {
           if(data.status == 200){
 
