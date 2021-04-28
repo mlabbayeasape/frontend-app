@@ -14,7 +14,7 @@ export class CartService {
 
   cart: Cart = new Cart();
   cart$ = new Subject<Cart>();
-  tva = environment.tva
+  tva = environment.tva/100
 
 
   constructor() { }
