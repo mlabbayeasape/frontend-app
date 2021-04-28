@@ -65,13 +65,13 @@
                       <div class="cart-block-links theme1">
                           <ul class="d-flex">
 
-                              <li class="mr-0 cart-block position-relative">
+                              <li class="mr-0 cart-block position-relative" >
                                   <a class="offcanvas-toggle" routerLink="/cart">
                                       <span class="position-relative">
                                           <i class="icon-bag"></i>
-                                          <span class="badge cbdg1">7</span>
+                                          <span class="badge cbdg1" *ngIf="resume">{{resume.quantity}}</span>
                                       </span>
-                                      <span class="cart-total position-relative" >$199</span>
+                                      <span class="cart-total position-relative" *ngIf="resume">{{resume.costTTC/100 | currency:'EUR'}}</span>
                                   </a>
                               </li>
                               <!-- cart block end -->

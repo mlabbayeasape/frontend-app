@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Cart } from '../models/cart';
 import { Item } from '../models/item';
 import { Product } from '../models/product';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -12,10 +13,15 @@ import { Product } from '../models/product';
 export class CartService {
 
   cart: Cart = new Cart();
+  cart$ = new Subject<Cart>();
   tva = environment.tva
 
 
   constructor() { }
+
+  emitCart(){
+    this.cart$.next(this.cart)
+  }
 
   addToCart(product: Product){
     const item = this.cart.items.find(item => item.product._id === product._id);
@@ -40,14 +46,29 @@ export class CartService {
       this.cart.resume.costTaxe += this.cart.resume.costHT * this.tva;
       this.cart.resume.costTTC += this.cart.resume.costHT * (1 + this.tva);
     })
+    this.emitCart();
   }
 
   removeOne(product){
-
+    const item = this.cart.items.find(item => item.product._id === product._id);
+    if(item){
+      if(item.quantity > 1){
+        item.quantity--;
+      }else{
+        const index = this.cart.items.indexOf(item);
+        this.cart.items.splice(index,1);
+      }
+      this.updateCart();
+    }
   }
 
   removeMany(product: Product){
-
+    const item = this.cart.items.find(item => item.product._id === product._id);
+    if(item){
+      const index = this.cart.items.indexOf(item);
+      this.cart.items.splice(index,1);
+      this.updateCart();
+    }
   }
 
 }
