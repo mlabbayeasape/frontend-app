@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-4">
       <button type="button" class="btn theme-btn--dark1 btn--md mt-2" (click)="filepicker.click()"> add Image</button>
-      <input style="display:none" type="file" #filepicker (change)="onImagePick($event)" class="form-control">
+      <input  type="file" #filepicker (change)="onImagePick($event)" class="form-control">
       <div class="image-preview" *ngIf="imagePreview">
         <img [src]="imagePreview" alt="">
       </div>
@@ -40,11 +40,14 @@
                     placeholder="Describe your product (type, quality, etc.)"></textarea>
         </div>
 
-        <button class="btn theme-btn--dark1 btn--md m-2" (click)="onSubmit()" [disabled]="productForm.invalid">Add Product </button>
+        <button class="btn theme-btn--dark1 btn--md m-2" (click)="onSubmit()" [disabled]="productForm.invalid">Save </button>
 
       </form>
     </div>
 
   </div>
 </div>
+
+
+
 

@@ -79,6 +79,8 @@ export class ProductService {
   }
 
   updateProduct(id: string, product: Product, image: File | string){
+    console.log("id="+id);
+    console.log("product",product)
     return new Promise((resolve,reject) => {
       let productData: FormData = new FormData();
       if(typeof image === 'string'){
@@ -87,12 +89,14 @@ export class ProductService {
         productData.append('image',image);
       }
       productData.append('product',JSON.stringify(product));
+
       this.http.put(this.api+'product/'+id, productData).subscribe(
         (data: Data) => {
           if(data.status == 200){
 
             resolve(data);
           }else{
+            console.log(data.message,data.status);
             reject(data.message);
           }
         },
